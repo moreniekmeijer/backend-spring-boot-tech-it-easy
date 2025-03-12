@@ -2,6 +2,8 @@ package nl.moreniekmeijer.backendspringboottechiteasycontroller.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "televisions")
 public class Television {
@@ -28,6 +30,19 @@ public class Television {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+
+    @OneToOne
+    RemoteController remoteController;
+
+    @ManyToOne
+    @JoinColumn(name = "ci_module_id")
+    private CIModule ciModule;
+
+    @ManyToMany
+    @JoinTable(name = "television_Wallbrackets",
+            joinColumns = @JoinColumn(name = "television"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket"))
+    private List<WallBracket> wallBrackets;
 
     public Television() {
     }
@@ -186,5 +201,29 @@ public class Television {
 
     public void setSold(Integer sold) {
         this.sold = sold;
+    }
+
+    public RemoteController getRemoteController() {
+        return remoteController;
+    }
+
+    public void setRemoteController(RemoteController remoteController) {
+        this.remoteController = remoteController;
+    }
+
+    public CIModule getCiModule() {
+        return ciModule;
+    }
+
+    public void setCiModule(CIModule ciModule) {
+        this.ciModule = ciModule;
+    }
+
+    public List<WallBracket> getWallBrackets() {
+        return wallBrackets;
+    }
+
+    public void setWallBrackets(List<WallBracket> wallBrackets) {
+        this.wallBrackets = wallBrackets;
     }
 }

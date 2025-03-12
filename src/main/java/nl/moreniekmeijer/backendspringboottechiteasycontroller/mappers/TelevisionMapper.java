@@ -49,6 +49,23 @@ public class TelevisionMapper {
         televisionResponseDto.setAmbiLight(television.getAmbiLight());
         televisionResponseDto.setOriginalStock(television.getOriginalStock());
         televisionResponseDto.setSold(television.getSold());
+
+        if (television.getRemoteController() != null) {
+            televisionResponseDto.setRemoteController(RemoteControllerMapper.toResponseDto(television.getRemoteController()));
+        }
+
+        if (television.getCiModule() != null) {
+            televisionResponseDto.setCiModule(CIModuleMapper.toResponseDto(television.getCiModule()));
+        }
+
+        if (television.getWallBrackets() != null) {
+            televisionResponseDto.setWallBrackets(
+                    television.getWallBrackets().stream()
+                            .map(WallBracketMapper::toResponseDto)
+                            .toList()
+            );
+        }
+
         return televisionResponseDto;
     }
 
