@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "wallBrackets")
+@Table(name = "wall_brackets")
 public class WallBracket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

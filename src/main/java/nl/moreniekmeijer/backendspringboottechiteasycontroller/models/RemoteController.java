@@ -3,7 +3,7 @@ package nl.moreniekmeijer.backendspringboottechiteasycontroller.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "remoteControllers")
+@Table(name = "remote_controllers")
 public class RemoteController {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class RemoteController {
     private Integer originalStock;
 
     @OneToOne(mappedBy = "remoteController")
-    Television television;
+    private Television television;
 
     public RemoteController() {
     }

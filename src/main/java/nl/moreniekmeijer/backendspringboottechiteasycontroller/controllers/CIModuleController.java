@@ -3,9 +3,11 @@ package nl.moreniekmeijer.backendspringboottechiteasycontroller.controllers;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.CIModuleInputDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.CIModuleResponseDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.services.CIModuleService;
+import nl.moreniekmeijer.backendspringboottechiteasycontroller.utils.URIUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,8 @@ public class CIModuleController {
     @PostMapping
     public ResponseEntity<CIModuleResponseDto> addCIModule(@RequestBody CIModuleInputDto ciModuleInputDto) {
         CIModuleResponseDto createdCIModule = ciModuleService.addCIModule(ciModuleInputDto);
-        return ResponseEntity.created(null).body(createdCIModule);
+        URI location = URIUtil.createResourceUri(createdCIModule.getId());
+        return ResponseEntity.created(location).body(createdCIModule);
     }
 
     @GetMapping

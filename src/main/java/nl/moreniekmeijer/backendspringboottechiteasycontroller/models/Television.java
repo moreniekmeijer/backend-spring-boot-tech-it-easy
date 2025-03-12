@@ -16,7 +16,7 @@ public class Television {
     private String name;
     private Double price;
     private Double availableSize;
-    private int refreshRate;
+    private Integer refreshRate;
 
     @Enumerated(EnumType.STRING)
     private ScreenType screenType;

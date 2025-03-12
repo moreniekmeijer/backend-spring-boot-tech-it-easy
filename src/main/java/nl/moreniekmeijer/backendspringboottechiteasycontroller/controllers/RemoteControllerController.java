@@ -3,9 +3,11 @@ package nl.moreniekmeijer.backendspringboottechiteasycontroller.controllers;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.RemoteControllerInputDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.RemoteControllerResponseDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.services.RemoteControllerService;
+import nl.moreniekmeijer.backendspringboottechiteasycontroller.utils.URIUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,8 @@ public class RemoteControllerController {
     @PostMapping
     public ResponseEntity<RemoteControllerResponseDto> addRemoteController(@RequestBody RemoteControllerInputDto remoteControllerInputDto) {
         RemoteControllerResponseDto createdRemoteController = remoteControllerService.addRemoteController(remoteControllerInputDto);
-        return ResponseEntity.created(null).body(createdRemoteController);
+        URI location = URIUtil.createResourceUri(createdRemoteController.getId());
+        return ResponseEntity.created(location).body(createdRemoteController);
     }
 
     @GetMapping

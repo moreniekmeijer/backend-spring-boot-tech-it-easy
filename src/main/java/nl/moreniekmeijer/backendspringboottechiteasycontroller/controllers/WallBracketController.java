@@ -3,9 +3,11 @@ package nl.moreniekmeijer.backendspringboottechiteasycontroller.controllers;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.WallBracketInputDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.dtos.WallBracketResponseDto;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.services.WallBracketService;
+import nl.moreniekmeijer.backendspringboottechiteasycontroller.utils.URIUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,7 +22,8 @@ public class WallBracketController {
     @PostMapping
     public ResponseEntity<WallBracketResponseDto> addWallBracket(@RequestBody WallBracketInputDto wallBracketInputDto) {
         WallBracketResponseDto createdWallBracket = wallBracketService.addWallBracket(wallBracketInputDto);
-        return ResponseEntity.created(null).body(createdWallBracket);
+        URI location = URIUtil.createResourceUri(createdWallBracket.getId());
+        return ResponseEntity.created(location).body(createdWallBracket);
     }
 
     @GetMapping

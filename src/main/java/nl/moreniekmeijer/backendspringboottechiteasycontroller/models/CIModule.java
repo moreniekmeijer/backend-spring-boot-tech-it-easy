@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "ciModules")
+@Table(name = "ci_modules")
 public class CIModule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class CIModule {
     private Double price;
 
     @OneToMany(mappedBy = "ciModule")
-    List<Television> televisions;
+    private List<Television> televisions;
 
     public CIModule() {
     }
