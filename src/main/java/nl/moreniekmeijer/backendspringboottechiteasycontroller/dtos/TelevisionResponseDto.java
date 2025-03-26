@@ -11,7 +11,7 @@ public class TelevisionResponseDto {
     private String name;
     private Double price;
     private Double availableSize;
-    private int refreshRate;
+    private Integer refreshRate;
     private ScreenType screenType;
     private String screenQuality;
     private Boolean smartTv;
@@ -74,11 +74,11 @@ public class TelevisionResponseDto {
         this.availableSize = availableSize;
     }
 
-    public int getRefreshRate() {
+    public Integer getRefreshRate() {
         return refreshRate;
     }
 
-    public void setRefreshRate(int refreshRate) {
+    public void setRefreshRate(Integer refreshRate) {
         this.refreshRate = refreshRate;
     }
 
