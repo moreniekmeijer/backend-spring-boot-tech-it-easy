@@ -13,4 +13,12 @@ public class URIUtil {
                 .buildAndExpand(resourceId)
                 .toUri();
     }
+
+    public static URI createUserUri(String username) {
+        return ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{username}")
+                .buildAndExpand(username)
+                .toUri();
+    }
 }

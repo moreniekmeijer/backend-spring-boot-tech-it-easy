@@ -9,7 +9,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
-
     // Deze eerste 3 variabelen zijn verplicht om te kunnen inloggen met een username, password en rol.
     @Id
     @Column(nullable = false, unique = true)
@@ -29,8 +28,8 @@ public class User {
 
     // Deze 3 variabelen zijn niet verplicht.
     // Je mag ook een "String banaan;" toevoegen, als je dat graag wilt.
-    @Column(nullable = false)
-    private boolean enabled = true;
+    @Column
+    private Boolean enabled = true;
 
     @Column
     private String apikey;
@@ -49,14 +48,20 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isEnabled() { return enabled;}
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
+    public Boolean isEnabled() { return enabled;}
+
+    public void setEnabled(Boolean enabled) { this.enabled = enabled; }
+
     public String getApikey() { return apikey; }
+
     public void setApikey(String apikey) { this.apikey = apikey; }
+
     public String getEmail() { return email; }
+
     public void setEmail(String email) { this.email = email;}
 
     public Set<Authority> getAuthorities() { return authorities; }
+
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }

@@ -6,6 +6,7 @@ import nl.moreniekmeijer.backendspringboottechiteasycontroller.models.Authority;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.models.User;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.repositories.UserRepository;
 import nl.moreniekmeijer.backendspringboottechiteasycontroller.utils.RandomStringGenerator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,8 +18,12 @@ import java.util.Set;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {}
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public List<UserDto> getAllUsers() {
         List<UserDto> collection = new ArrayList<>();
@@ -26,6 +31,7 @@ public class UserService {
         for (User user : users) {
             collection.add(fromUser(user));
         }
+        return collection;
     }
 
     public UserDto getUser(String username) {
@@ -46,6 +52,7 @@ public class UserService {
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
